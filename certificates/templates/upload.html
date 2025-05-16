@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certificate Upload</title>
+</head>
+<body>
+    <h1>Upload Certificate to Generate Hash & Extract Text</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Select Certificate (Image or PDF):</label><br>
+        <input type="file" name="certificate" required><br><br>
+        <button type="submit">Upload & Generate</button>
+    </form>
+
+    {% if file_name %}
+        <h2>Result:</h2>
+        <p><strong>File Name:</strong> {{ file_name }}</p>
+        <p><strong>SHA256 Hash:</strong> {{ file_hash }}</p>
+        <p><strong>Extracted Text:</strong></p>
+        <ul>
+            {% for line in extracted_text %}
+                <li>{{ line }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
